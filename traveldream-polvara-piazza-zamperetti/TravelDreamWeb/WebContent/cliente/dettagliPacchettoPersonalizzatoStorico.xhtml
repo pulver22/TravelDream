@@ -1,0 +1,156 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">	
+  
+<h:head>
+<title>Dettagli Pacchetto</title>
+</h:head>
+
+<h:body>
+	<p:layout >
+	<p:layoutUnit position="center" header="Dettagli Pacchetto">
+	<h:panelGroup>
+		<h:panelGrid id="display" columns="2" cellpadding="4">
+			
+			<f:facet name="header"></f:facet>
+	
+			<h:outputText value="ID:" />
+			<h:outputText value="#{dettagliPacchettoPersonalizzatoBean.pacchetto.id}" style="font-weight:bold" />
+			
+			<p:separator/> <br/>
+			
+			<h:outputText value="Luogo:" />
+			<h:outputText value="#{dettagliPacchettoPersonalizzatoBean.pacchetto.luogo}" style="font-weight:bold" />
+			
+			<p:separator/> <br/>
+			
+			<h:outputText value="Data di partenza:" />
+			<h:outputText value="#{dettagliPacchettoPersonalizzatoBean.pacchetto.voloAndataPers.volo.dataEOraFormattati}" style="font-weight:bold" />
+			
+			<h:outputText value="Luogo di partenza del volo di andata:" />
+			<h:outputText value="#{dettagliPacchettoPersonalizzatoBean.pacchetto.voloAndataPers.volo.luogoPartenza}" style="font-weight:bold" />
+			
+			<h:outputText value="Prezzo del volo di andata:" />
+			<h:outputText value="#{dettagliPacchettoPersonalizzatoBean.pacchetto.voloAndataPers.volo.prezzo}€" style="font-weight:bold" />
+			
+			<p:outputLabel value="" rendered="#{!dettagliPacchettoPersonalizzatoBean.voloAndataRegalatoENonStorico()}"/>
+			<p:outputLabel rendered ="#{dettagliPacchettoPersonalizzatoBean.voloAndataRegalatoENonStorico()}"><font color="red">Regalato!</font></p:outputLabel>
+			
+			
+			<br/>
+			
+			<p:separator/> <br/>
+					
+			<h:outputText value="Data di ritorno:" />
+			<h:outputText value="#{dettagliPacchettoPersonalizzatoBean.pacchetto.voloRitornoPers.volo.dataEOraFormattati}" style="font-weight:bold" />
+			
+			<h:outputText value="Luogo di arrivo del volo di ritorno:" />
+			<h:outputText value="#{dettagliPacchettoPersonalizzatoBean.pacchetto.voloRitornoPers.volo.luogoDestinazione}" style="font-weight:bold" />
+			
+			<h:outputText value="Prezzo del volo di ritorno:" />
+			<h:outputText value="#{dettagliPacchettoPersonalizzatoBean.pacchetto.voloRitornoPers.volo.prezzo}€" style="font-weight:bold" />
+			
+			<p:outputLabel value="" rendered="#{!dettagliPacchettoPersonalizzatoBean.voloAndataRegalatoENonStorico()}"/>
+			<p:outputLabel rendered ="#{dettagliPacchettoPersonalizzatoBean.voloRitornoRegalatoENonStorico()}"><font color="red">Regalato!</font></p:outputLabel>
+			
+			<br/>
+			
+			<p:separator/> <br/>
+			
+			<h:outputText value="Nome dell'hotel:" />
+			<h:outputText value="#{dettagliPacchettoPersonalizzatoBean.pacchetto.hotelPers.hotel.nome}" style="font-weight:bold" />
+			
+			<h:outputText value="Indirizzo dell'hotel:" />
+			<h:outputText value="#{dettagliPacchettoPersonalizzatoBean.pacchetto.hotelPers.hotel.indirizzo}" style="font-weight:bold" />
+			
+			<h:outputText value="Persistenza all'hotel:" />
+			<h:outputText value="#{dettagliPacchettoPersonalizzatoBean.pacchetto.durataPersistenza}gg" style="font-weight:bold" />
+			
+			<h:outputText value="Prezzo dell'hotel:" />
+			<h:outputText value="#{dettagliPacchettoPersonalizzatoBean.pacchetto.hotelPers.hotel.prezzo}€/gg" style="font-weight:bold" />
+			
+			<h:outputText value="Prezzo complessivo dell'hotel:" />
+			<h:outputText value="#{dettagliPacchettoPersonalizzatoBean.pacchetto.hotelPers.hotel.prezzo * dettagliPacchettoPersonalizzatoBean.pacchetto.durataPersistenza}€" style="font-weight:bold" />
+
+			<p:outputLabel value="" rendered="#{!dettagliPacchettoPersonalizzatoBean.voloAndataRegalatoENonStorico()}"/>
+			<p:outputLabel rendered ="#{dettagliPacchettoPersonalizzatoBean.hotelRegalatoENonStorico()}"><font color="red">Regalato!</font></p:outputLabel>
+
+			
+			<br/>
+			
+			<p:separator/> <br/>
+			
+			<h:outputText value="Numero escursioni:" />
+			<h:outputText value="#{dettagliPacchettoPersonalizzatoBean.pacchetto.numeroEscursioni}" style="font-weight:bold" />
+			
+		</h:panelGrid>
+			
+		
+		<h:outputText value="Escursioni:" />
+		
+		<h:form>
+		<h:dataTable id="dettagliEscursioni" var="escursionePers" value="#{dettagliPacchettoPersonalizzatoBean.pacchetto.escursioniPers}" style="width:100%">
+			
+			<p:column>
+			<h:panelGrid id="display" columns="2" cellpadding="4" style="width:99%">
+				<p:separator/> <br/>
+				
+				<h:outputText value="Nome dell'escursione:" />
+				<h:outputText value="#{escursionePers.escursione.nome}" style="font-weight:bold" />
+				
+				<h:outputText value="Data:" />
+				<h:outputText value="#{escursionePers.escursione.dataFormattata}" style="font-weight:bold" />
+				
+				
+				<h:outputText value="Prezzo dell'escursione:" />
+				<h:outputText value="#{escursionePers.escursione.prezzo}€" style="font-weight:bold" />
+				
+				<p:outputLabel value="" rendered="#{!dettagliPacchettoPersonalizzatoBean.voloAndataRegalatoENonStorico()}"/>
+				<p:outputLabel rendered ="#{dettagliPacchettoPersonalizzatoBean.escursioneRegalatoENonStorico(escursionePers)}"><font color="red">Regalato!</font></p:outputLabel>
+			</h:panelGrid>
+			</p:column>		
+		
+		</h:dataTable>
+		</h:form>
+	</h:panelGroup>	
+	</p:layoutUnit>
+	
+	<p:layoutUnit position="east">
+			
+			<p:panel header="Invita un amico" >
+				<h:form>
+				<h:outputText>Invita un amico</h:outputText>
+				<p:inputText id="mailAmico" value="#{gestoreInvitiBean.mailAmico}"/>  
+				<p:commandButton id="messaggio" value="Invita" onclick="PF('messaggio').show();" type="button">
+				</p:commandButton>
+				</h:form>
+			</p:panel>
+			
+			<p:panel>
+				<h:form>
+					<p:commandButton ajax="false" onclick="window.opener=null;window.open('','_self');window.close();" value="Chiudi"/>
+				</h:form>
+			</p:panel>
+			
+			
+			
+			<p:dialog id="messGlg" header="Messaggio" widgetVar="messaggio" resizable="false" width="300">  
+    			<h:outputText value="Il seguente messaggio è stato correttamente inviato:" />  
+    			<p:fieldset legend="Partecipa al mio viaggio!">  
+    				<h:panelGrid>  
+        
+        				<h:outputText  value="Ciao! Se vuoi visualizzare il pacchetto del mio prossimo viaggio prendi parte al fantastico mondo 
+        				di TravelDream e inserisci il codice '#{dettagliPacchettoPersonalizzatoBean.pacchetto.id}' nell'apposita sezione presenta in Home Page" />  
+    				</h:panelGrid>  
+				</p:fieldset>  
+			</p:dialog> 
+			
+			
+		</p:layoutUnit>
+		
+	</p:layout>
+</h:body>
+</html>

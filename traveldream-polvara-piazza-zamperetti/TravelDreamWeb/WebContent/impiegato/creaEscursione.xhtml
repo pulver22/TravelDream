@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<title>Nuova Escursione</title>
+</h:head>
+<h:body>
+		<p:panel header="Inserire i dati della nuova escursione">
+	<h:form>
+			<h:panelGrid columns="3" id="regGrid">
+				
+				<h:outputLabel for="nome">Nome</h:outputLabel>
+				<p:inputText id="nome" value="#{creaComponenteBean.currentEscursione.nome}" />
+				<p:message for="nome" />
+
+				<h:outputLabel for="luogo">Luogo</h:outputLabel>
+				<p:inputText id="luogo" value="#{creaComponenteBean.currentEscursione.luogo}" />
+				<p:message for="luogo" />
+				
+				<h:outputLabel for="data">Data</h:outputLabel>
+				<p:calendar id="data" value="#{creaComponenteBean.currentEscursione.data}" />
+				<p:message for="data" />
+
+				<h:outputLabel for="prezzo">Prezzo</h:outputLabel>
+				<p:inputText id="prezzo" value="#{creaComponenteBean.currentEscursione.prezzo}" />
+				<p:message for="prezzo" />
+				
+			</h:panelGrid>
+			
+			<p:commandButton value="Crea" update="regGrid"
+				action="#{creaComponenteBean.creaEscursione()}" />
+	</h:form>
+	<h:form>
+	<p:commandButton action="#{creaComponenteBean.indietro()}" value="Indietro"/>
+	</h:form>
+		</p:panel>
+</h:body>
+</html>

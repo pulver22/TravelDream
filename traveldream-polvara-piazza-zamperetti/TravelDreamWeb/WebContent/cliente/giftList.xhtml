@@ -1,0 +1,140 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<title>Ecco la tua GiftList:</title>
+</h:head>
+<h:body>
+	<p:layout >
+	<p:layoutUnit position="center" header="Dettagli GiftList">
+	
+	    <p:dataTable id="voliGF" var="v" value="#{gestisciGiftListBean.voliGF}"> 
+	     
+	     <f:facet name="header">  
+           Voli in GL  
+        </f:facet>  
+	        <p:column headerText="Luogo Partenza" style="width:24%">  
+	            <h:outputText value="#{v.volo.luogoPartenza}" />  
+	        </p:column>  
+	  
+	        <p:column headerText="Luogo Destinazione" style="width:24%">  
+	            <h:outputText value="#{v.volo.luogoDestinazione}" />  
+	        </p:column> 
+	        
+	        <p:column headerText="Data" style="width:24%">  
+	            <h:outputText value="#{v.volo.dataEOraFormattati}" />  
+	        </p:column> 
+	        
+	        <p:column headerText="Prezzo" style="width:24%">  
+	            <h:outputText value="#{v.volo.prezzo}" />  
+	        </p:column> 
+	        
+	        <p:column style="width:4%">
+				<h:form>
+				<p:commandButton action="#{gestisciGiftListBean.rimuoviVoloDaGL(v)}" value="Rimuovi"/>
+				</h:form>		
+			</p:column>  
+			
+	    </p:dataTable>
+
+    
+        
+	    <p:dataTable id="hotelsGF" var="h" value="#{gestisciGiftListBean.hotelsGF}"> 
+    	<f:facet name="header">  
+            Hotels in GL  
+        </f:facet>  
+	     
+	        <p:column headerText="Nome" style="width:24%">  
+	            <h:outputText value="#{h.hotel.nome}" />  
+	        </p:column>  
+	  
+	        <p:column headerText="Luogo" style="width:24%">  
+	            <h:outputText value="#{h.hotel.luogo}" />  
+	        </p:column> 
+	        
+	        <p:column headerText="Indirizzo" style="width:24%">  
+	            <h:outputText value="#{h.hotel.indirizzo}" />  
+	        </p:column> 
+	        
+	        <p:column headerText="Prezzo" style="width:24%">  
+	            <h:outputText value="#{h.hotel.prezzo}" />  
+	        </p:column> 
+	        
+	        <p:column style="width:4%">
+				<h:form>
+				<p:commandButton action="#{gestisciGiftListBean.rimuoviHotelDaGL(h)}" value="Rimuovi"/>
+				</h:form>			
+			</p:column>  
+			
+	    </p:dataTable>
+
+    
+        
+	    <p:dataTable id="escursioniGF" var="e" value="#{gestisciGiftListBean.escursioniGF}"> 
+    	<f:facet name="header">  
+            Escursioni in GL 
+        </f:facet>  
+	     
+	        <p:column headerText="Nome" style="width:24%">  
+	            <h:outputText value="#{e.escursione.nome}" />  
+	        </p:column>  
+	  
+	        <p:column headerText="Luogo" style="width:24%">  
+	            <h:outputText value="#{e.escursione.luogo}" />  
+	        </p:column> 
+	        
+	        <p:column headerText="Indirizzo" style="width:24%">  
+	            <h:outputText value="#{e.escursione.dataFormattata}" />  
+	        </p:column> 
+	        
+	        <p:column headerText="Prezzo" style="width:24%">  
+	            <h:outputText value="#{e.escursione.prezzo}" />  
+	        </p:column> 
+	        
+	        <p:column style="width:4%">
+				<h:form>
+				<p:commandButton action="#{gestisciGiftListBean.rimuoviEscursioneDaGL(e)}" value="Rimuovi"/>
+				</h:form>		
+			</p:column>    
+			
+	    </p:dataTable>
+	    </p:layoutUnit>
+	    
+	    <p:layoutUnit position="east">
+			
+			<p:panel header="Invia ad un amico" >
+				<h:form id="invitaAmico">
+				<h:outputText>Invia ad un amico</h:outputText>
+				<p:inputText id="mailAmico" value="#{gestoreInvitiBean.mailAmico}"/>  
+				<p:commandButton id="messaggio" update="invitaAmico" value="Invita" onclick="PF('messaggio').show();" type="button">
+				</p:commandButton>
+				<p:message for="mailAmico"/>
+				</h:form>
+			</p:panel>
+			
+			<p:panel>
+				<h:form>
+					<p:commandButton action="/home?faces-redirect=true" value="Indietro"/>
+				</h:form>
+			</p:panel>
+			
+			<p:dialog id="messGlg" header="Messaggio" widgetVar="messaggio" resizable="false" width="300" >  
+    			<h:outputText value="Il seguente messaggio è stato correttamente inviato:" />  
+    			<p:fieldset legend="Rendimi felice! ">  
+    				<h:panelGrid>  
+        
+        				<h:outputText  value="Ciao! Se vuoi farmi felice e dimostrarmi la tua amicizia dai un'occhiata alla mia GiftList e regalami qualcosa. 
+        				Inserisci il mio indirizzo email nell'apposita sezione presenta in Home Page" />  
+    				</h:panelGrid>  
+				</p:fieldset>  
+			</p:dialog> 
+		</p:layoutUnit>
+	    
+    
+	    </p:layout>
+</h:body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<title>Login</title>
+</h:head>
+<h:body>
+	<h:form>
+		<p:panel header="Form di Registrazione">
+			<h:panelGrid columns="3" id="regGrid">
+				<h:outputLabel for="email">Email:</h:outputLabel>
+				<p:inputText id="email" value="#{registerBean.user.email}" />
+				<p:message for="email" />
+
+				<h:outputLabel for="nome">Nome:</h:outputLabel>
+				<p:inputText id="nome" value="#{registerBean.user.nome}" />
+				<p:message for="nome" />
+
+				<h:outputLabel for="cognome">Cognome:</h:outputLabel>
+				<p:inputText id="cognome" value="#{registerBean.user.cognome}" />
+				<p:message for="cognome" />
+
+				<h:outputLabel for="password">Password:</h:outputLabel>
+				<p:password id="password" value="#{registerBean.user.password}"
+					feedback="true" match="pwd2" label="Password"/>
+				<p:message for="password" />
+
+				<h:outputLabel for="pwd2">Confirm Password:</h:outputLabel>
+				<p:password id="pwd2" label="Confirm Password" value="#{registerBean.user.password}"/>
+				<br></br>
+				<h:outputLabel for="numCartaCredito">Numero di carta di credito:</h:outputLabel>
+				<p:inputText id="numCartaCredito" value="#{registerBean.user.numCartaCredito}" />
+				<p:message for="numCartaCredito" />
+				
+				<h:outputLabel for="indirizzoFatturazione">Indirizzo di fatturazione:</h:outputLabel>
+				<p:inputText id="indirizzoFatturazione" value="#{registerBean.user.indirizzoFatturazione}" />
+				<p:message for="indirizzoFatturazione" />
+			</h:panelGrid>
+			<p:commandButton value="Register" update="regGrid"
+				action="#{registerBean.register()}" />
+
+		</p:panel>
+	</h:form>
+</h:body>
+</html>

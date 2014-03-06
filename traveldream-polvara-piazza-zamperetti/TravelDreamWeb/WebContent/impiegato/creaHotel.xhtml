@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<title>Nuovo Hotel</title>
+</h:head>
+<h:body>
+		<p:panel header="Inserire i dati del nuovo hotel">
+	<h:form>
+			<h:panelGrid columns="3" id="regGrid">
+				
+				<h:outputLabel for="nome">Nome</h:outputLabel>
+				<p:inputText id="nome" value="#{creaComponenteBean.currentHotel.nome}" />
+				<p:message for="nome" />
+
+				<h:outputLabel for="luogo">Luogo</h:outputLabel>
+				<p:inputText id="luogo" value="#{creaComponenteBean.currentHotel.luogo}" />
+				<p:message for="luogo" />
+
+				<h:outputLabel for="indirizzo">Indirizzo</h:outputLabel>
+				<p:inputText id="indirizzo" value="#{creaComponenteBean.currentHotel.indirizzo}" />
+				<p:message for="indirizzo" />
+
+				<h:outputLabel for="prezzo">Prezzo</h:outputLabel>
+				<p:inputText id="prezzo" value="#{creaComponenteBean.currentHotel.prezzo}" />
+				<p:message for="prezzo" />
+				
+			</h:panelGrid>
+			
+			<p:commandButton value="Crea" update="regGrid"
+				action="#{creaComponenteBean.creaHotel()}" />
+	</h:form>
+	<h:form>
+	<p:commandButton action="#{creaComponenteBean.indietro()}" value="Indietro"/>
+	</h:form>
+		</p:panel>
+</h:body>
+</html>

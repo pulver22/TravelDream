@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+<title>Lista Pacchetti Predefiniti disponibili</title>
+</h:head>
+
+<h:body>
+
+	
+	<f:metadata>
+		<f:event type="preRenderView" listener="#{aggiungiAlCarrelloBean.loadPredefiniti}"/>
+	</f:metadata>
+	
+	<!-- <h1>Lista Pacchetti Predefiniti disponibili:</h1> -->
+	
+	<p:growl id="msgs" showDetail="true" /> 
+	
+	<h:form id="form">  
+	    <p:dataTable id="pacchettiPredefinitiDTO" var="p" value="#{aggiungiAlCarrelloBean.pacchettiPredefinitiDTO}"> 
+	     
+	        <p:column headerText="Luogo" style="width:24%">  
+	            <h:outputText value="#{p.luogo}" />  
+	        </p:column>  
+	  
+	        <p:column headerText="Luogo Partenza" style="width:24%">  
+	            <h:outputText value="#{p.voloAndata.luogoPartenza}" />  
+	        </p:column> 
+	        
+	        <p:column headerText="Data Partenza" style="width:24%">  
+	            <h:outputText value="#{p.voloAndata.giorno}" />  
+	        </p:column> 
+	        
+	        <p:column headerText="Data Ritorno" style="width:24%">  
+	            <h:outputText value="#{p.voloRitorno.giorno}" />  
+	        </p:column> 
+	        <!-- 
+	        <p:column headerText="Prezzo" style="width:24%">  
+	            <h:outputText value="#{p.prezzo}" />  
+	        </p:column> 
+	        -->
+	        <p:column style="width:4%">  
+                <p:commandButton id="selectButton" update=":form:display" oncomplete="PF('paccPredDialog').show()" icon="ui-icon-search" title="View">  
+                	<f:setPropertyActionListener value="#{p}" target="#{aggiungiAlCarrelloBean.pacchettoScelto}" />  
+            	</p:commandButton>  
+        	</p:column> 
+        	
+        	<p:column headerText="Aggiungi al Carrello" style="width:24%">  
+	           	<h:form> 
+	           	 <p:commandButton action="#{aggiungiAlCarrelloBean.aggiungiAlCarrello()}" value="aggiungi">
+	           	 	<f:setPropertyActionListener value="#{p}" target="#{aggiungiAlCarrelloBean.pacchettoScelto}" /> 
+	        	</p:commandButton>  
+	        	</h:form>
+	        </p:column>  
+        	
+	    </p:dataTable>
+	    
+	    <p:dialog header="Dettagli Pacchetto" widgetVar="paccPredDialog" resizable="false" id="paccDlg"  
+                showEffect="fade" hideEffect="explode" modal="true">  
+              
+  
+	        <h:panelGrid id="display" columns="2" cellpadding="4" style="margin:0 auto;">  
+	  		
+	  			<f:facet name="header"></f:facet>
+	  			
+	            <h:outputText value="Luogo:" />  
+	            <h:outputText value="#{aggiungiAlCarrelloBean.pacchettoScelto.luogo}" style="font-weight:bold"/>  
+	            
+	  
+	            <h:outputText value="Luogo di Partenza:" />  
+	            <h:outputText value="#{aggiungiAlCarrellobean.pacchettoScelto.voloAndata.luogoPartenza}" style="font-weight:bold"/>  
+	  
+	  
+	            <h:outputText value="Data di Partenza:" />  
+	            <h:outputText value="#{aggiungiAlCarrelloBean.pacchettoScelto.voloAndata.giorno}" style="font-weight:bold"/>  
+	  
+	            <h:outputText value="Data di ritorno:" />  
+	            <h:outputText value="#{aggiungiAlCarrelloBean.pacchettoScelto.voloRitorno.giorno}" style="font-weight:bold"/>  
+	  
+	        </h:panelGrid>  
+  
+    </p:dialog> 
+    </h:form>
+    
+</h:body>
+</html>

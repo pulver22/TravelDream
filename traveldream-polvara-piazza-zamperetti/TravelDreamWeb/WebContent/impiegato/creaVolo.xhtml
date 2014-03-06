@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<title>Nuovo Volo</title>
+</h:head>
+<h:body>
+		<p:panel header="Inserire i dati del nuovo volo">
+	<h:form>
+			<h:panelGrid columns="3" id="regGrid">
+				
+				<h:outputLabel for="giorno">Giorno</h:outputLabel>
+				<p:calendar id="giorno" value="#{creaComponenteBean.currentVolo.giorno}" />
+				<p:message for="giorno" />
+				
+				<h:outputLabel for="ora">Ora</h:outputLabel>
+				<p:inputMask id="ora" mask="99:99" value="#{creaComponenteBean.currentVolo.ora}" />
+				<p:message for="ora" />
+				
+
+				<h:outputLabel for="luogoPartenza">Luogo Partenza</h:outputLabel>
+				<p:inputText id="luogoPartenza" value="#{creaComponenteBean.currentVolo.luogoPartenza}" />
+				<p:message for="luogoPartenza" />
+
+				<h:outputLabel for="luogoDestinazione">Luogo Destinazione</h:outputLabel>
+				<p:inputText id="luogoDestinazione" value="#{creaComponenteBean.currentVolo.luogoDestinazione}" />
+				<p:message for="luogoDestinazione" />
+
+				<h:outputLabel for="prezzo">Prezzo</h:outputLabel>
+				<p:inputText id="prezzo" value="#{creaComponenteBean.currentVolo.prezzo}" />
+				<p:message for="prezzo" />
+				
+			</h:panelGrid>
+			
+			<p:commandButton value="Crea" update="regGrid"
+				action="#{creaComponenteBean.creaVolo()}" />
+			
+	</h:form>
+	<h:form>
+	<p:commandButton action="#{creaComponenteBean.indietro()}" value="Indietro"/>
+	</h:form>
+		</p:panel>
+</h:body>
+</html>

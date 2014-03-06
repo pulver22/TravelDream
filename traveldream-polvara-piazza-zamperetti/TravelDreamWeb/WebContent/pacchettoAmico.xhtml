@@ -1,0 +1,108 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+  
+<h:head>
+<title>Pacchetto Amico</title>
+</h:head>
+
+<h:body>
+	<p:layout >
+	<p:layoutUnit position="center" header="Dettagli del pacchetto">	
+	
+		<p:panel header="Volo Andata">
+			<h:panelGrid columns="4" id="regGrid1">
+				
+				<h:outputLabel>#{gestoreInvitiBean.pacchettoAmico.voloAndataPers.volo.luogoPartenza}</h:outputLabel>
+				
+				<h:outputLabel>#{gestoreInvitiBean.pacchettoAmico.voloAndataPers.volo.luogoDestinazione}</h:outputLabel>
+				
+				<h:outputLabel>#{gestoreInvitiBean.pacchettoAmico.voloAndataPers.volo.dataEOraFormattati}</h:outputLabel>
+								
+				<h:outputLabel>#{gestoreInvitiBean.pacchettoAmico.voloAndataPers.volo.prezzo}</h:outputLabel>
+				
+			</h:panelGrid>
+
+		</p:panel>	
+	    
+	    <p:panel header="Hotel">
+			<h:panelGrid columns="4" id="regGrid2">
+				
+				<h:outputLabel>#{gestoreInvitiBean.pacchettoAmico.hotelPers.hotel.nome}</h:outputLabel>
+				
+				<h:outputLabel>#{gestoreInvitiBean.pacchettoAmico.hotelPers.hotel.luogo}</h:outputLabel>
+				
+				<h:outputLabel>#{gestoreInvitiBean.pacchettoAmico.hotelPers.hotel.indirizzo}</h:outputLabel>
+				
+				<h:outputLabel>#{gestoreInvitiBean.pacchettoAmico.hotelPers.hotel.prezzo}</h:outputLabel>
+				
+			</h:panelGrid>
+			
+		</p:panel>	
+			
+		<p:panel header="Volo Ritorno">
+			<h:panelGrid columns="4" id="regGrid3">
+				
+				<h:outputLabel>#{gestoreInvitiBean.pacchettoAmico.voloRitornoPers.volo.luogoPartenza}</h:outputLabel>
+				
+				<h:outputLabel>#{gestoreInvitiBean.pacchettoAmico.voloRitornoPers.volo.luogoDestinazione}</h:outputLabel>
+				
+				<h:outputLabel>#{gestoreInvitiBean.pacchettoAmico.voloRitornoPers.volo.dataEOraFormattati}</h:outputLabel>
+				
+				<h:outputLabel>#{gestoreInvitiBean.pacchettoAmico.voloRitornoPers.volo.prezzo}</h:outputLabel>
+				
+			</h:panelGrid>
+
+
+		</p:panel>	
+	    
+	   
+	    <p:dataTable id="escursioniPers" var="e" value="#{gestoreInvitiBean.pacchettoAmico.escursioniPers}"> 
+
+		<f:facet name="header">  
+           Escursioni  
+        </f:facet>  
+			<p:column headerText="Nome" style="width:24%">  
+	            <h:outputText value="#{e.escursione.nome}" />  
+	        </p:column>
+			
+	        <p:column headerText="Luogo" style="width:24%">  
+	            <h:outputText value="#{e.escursione.luogo}" />  
+	        </p:column> 
+	        
+	        <p:column headerText="Data" style="width:24%">  
+	            <h:outputText value="#{e.escursione.dataFormattata}" />  
+	        </p:column> 
+	        
+	        <p:column headerText="Prezzo" style="width:24%">  
+	            <h:outputText value="#{e.escursione.prezzo}" />  
+	        </p:column>  
+	        
+	    </p:dataTable>
+
+		
+		<h:panelGroup rendered="#{userBean.isUtenteCliente()}">
+
+			<h:form>
+				<p:commandButton value="Partecipa anche tu!"
+					action="#{gestoreInvitiBean.partecipa()}" />
+			</h:form>
+
+		</h:panelGroup>
+		
+		<h:panelGroup rendered="#{!userBean.isUtenteCliente()}">
+
+			<h:form>
+				<p:commandButton value="Accedi per partecipare!"
+					action="login" />
+			</h:form>
+
+		</h:panelGroup>
+    <p:commandButton action="home?faces-redirect=true" value="Indietro"/>
+    </p:layoutUnit>
+    </p:layout>
+</h:body>
+</html>

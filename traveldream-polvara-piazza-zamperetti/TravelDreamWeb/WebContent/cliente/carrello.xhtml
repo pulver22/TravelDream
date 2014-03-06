@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+  
+<h:head>
+<title>Carrello</title>
+</h:head>
+
+<h:body>
+<p:layout >
+	<p:layoutUnit position="center" header="Dettagli Carrello">
+	
+	<p:growl id="msgs" showDetail="true" /> 
+	
+	<h:panelGroup>
+	<h:form>
+	
+	    <p:dataTable id="carrello" var="p" value="#{clienteBean.carrello}" paginator="true" rows="10"  
+                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
+                 rowsPerPageTemplate="5,10,15"> 
+	     
+	     	<p:column headerText="ID" style="width:24%">  
+	            <h:outputText value="#{p.id}" />  
+	        </p:column>
+	     	
+	        <p:column headerText="Luogo" style="width:24%">  
+	            <h:outputText value="#{p.luogo}" />  
+	        </p:column>  
+	 
+	        <p:column headerText="Luogo Partenza" style="width:24%">  
+	            <h:outputText value="#{p.voloAndataPers.volo.luogoPartenza}" />  
+	        </p:column> 
+	        
+	        <p:column headerText="Data Partenza" style="width:24%">  
+	            <h:outputText value="#{p.voloAndataPers.volo.dataEOraFormattati}" />  
+	        </p:column> 
+	        
+	        <p:column headerText="Data Ritorno" style="width:24%">  
+	            <h:outputText value="#{p.voloRitornoPers.volo.dataEOraFormattati}" />  
+	        </p:column> 
+	        
+	        <p:column headerText="Prezzo" style="width:24%">  
+	            <h:outputText value="#{p.prezzo}" />  
+	        </p:column> 
+	        
+	        <p:column style="width:4%">
+				<p:commandButton action="#{dettagliPacchettoPersonalizzatoBean.visualizzaPacchetto(p)}" icon="ui-icon-search" ajax="false" onclick="form.target='_blank'" />
+			</p:column> 
+			
+			<p:column style="width:4%">
+				<p:commandButton action="#{aggiungiAlCarrelloBean.compraPacchetto(p)}" value="Acquista"  update="carrello">
+				</p:commandButton>
+			</p:column>  
+			
+			<p:column style="width:4%">
+				
+				<p:commandButton action="#{clienteBean.rimuoviDalCarrello(p)}" value="Rimuovi" update="carrello" >
+				</p:commandButton>
+				
+			</p:column>
+			
+			<p:column style="width:4%">
+				
+				<p:commandButton action="#{personalizzaPacchettoBean.initModificaPacchetto(p)}" value="Personalizza" ajax="false" >
+				</p:commandButton>
+				
+			</p:column>  
+			
+	    </p:dataTable>
+	   
+    </h:form>
+    </h:panelGroup>
+  <p:commandButton action="/home?faces-redirect=true" value="Indietro"/>
+    </p:layoutUnit>
+  </p:layout>
+</h:body>
+</html>

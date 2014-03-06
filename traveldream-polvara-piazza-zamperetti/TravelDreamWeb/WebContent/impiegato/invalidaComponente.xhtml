@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<title>Invalida Componente</title>
+</h:head>
+<h:body>
+	
+	
+	
+	<p:panel>
+	<p:dataTable id="componentiTable" var="c" value="#{invalidaComponenteBean.componenti}" rules="rows"
+			cellpadding="5" frame="border" emptyMessage="Nessun componente disponibile"
+			paginator="true" rows="10"  
+                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
+                 rowsPerPageTemplate="5,10,15">
+		
+		<f:facet name="header">  
+           Gestisci Componenti  
+        </f:facet> 
+		
+		<p:column headerText="Id">
+			<h:outputText value="#{c.id}" />
+		</p:column>
+		
+		<p:column headerText="Tipo">
+			<h:outputText value="#{c.tipo}" />
+		</p:column>
+			
+		<p:column headerText="Info">
+			<h:outputText value="#{c.info}" />
+		</p:column>
+		
+		<p:column width="100">
+			<h:form>
+			
+				<p:growl id="messages" showDetail="true" />  
+	
+				<p:confirmDialog global="true" showEffect="fade" hideEffect="explode">  
+			        <p:commandButton value="Continua" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>  
+			        <p:commandButton value="Annulla" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>       
+			    </p:confirmDialog>
+			    
+				<p:commandButton value="invalida" action="#{invalidaComponenteBean.invalidaComponente(c)}" update="messages">
+        			<p:confirm header="Conferma" message="Verranno eliminati tutti pacchetti predefiniti contenenti questo componente" icon="ui-icon-alert" />  
+    			</p:commandButton>
+    			
+			</h:form>
+		</p:column>
+	
+	</p:dataTable>
+	<h:form>
+	<p:commandButton action="/home?faces-redirect=true" value="Indietro"/>
+	</h:form>
+	
+	</p:panel>
+	
+</h:body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<title>Modifica Pacchetto Predefinito</title>
+</h:head>
+<h:body>
+	
+	<h:form>
+		<h:panelGrid columns="3">
+			<h:outputLabel for="luogo">Luogo</h:outputLabel>
+			<p:outputLabel id="luogo" value="#{creaPacchettoPredefintoBean.currentPacchettoPred.luogo}"/>
+			<p:outputLabel />
+		</h:panelGrid>
+		
+		<p:separator/>
+		
+		<h:panelGrid columns="3">
+			<h:outputLabel for="hotelSel">Hotel</h:outputLabel>
+			<p:selectOneListbox id="hotelSel" value="#{creaPacchettoPredefintoBean.hotel}" converter="hotelConverter" var="h" style="width:500px; height:250px">
+								
+				<f:selectItems 	value="#{creaPacchettoPredefintoBean.hotels}" var="hotelDTO" itemValue="#{hotelDTO}" />
+					
+				<p:column> #{h.idHotel}				</p:column>
+				<p:column> -						</p:column>
+				<p:column> #{h.nome}, #{h.indirizzo}</p:column>
+				<p:column> #{h.prezzo}€				</p:column>
+			</p:selectOneListbox>
+			<p:message for="hotelSel" />
+			
+			
+			<h:outputLabel for="voloAndataSel">Volo Andata</h:outputLabel>
+			<p:selectOneListbox id="voloAndataSel" value="#{creaPacchettoPredefintoBean.voloAndata}" converter="voloConverter" var="v" style="width:500px; height:250px">
+								
+				<f:selectItems 	value="#{creaPacchettoPredefintoBean.voliAndata}" var="voloDTO"  itemValue="#{voloAndataDTO}" />
+					
+				<p:column> #{v.idVolo}				</p:column>
+				<p:column> -						</p:column>
+				<p:column> #{v.luogoPartenza}		</p:column>
+				<p:column> #{v.dataEOraFormattati}	</p:column>
+				<p:column> #{v.prezzo}€				</p:column>
+			</p:selectOneListbox>
+			<p:message for="voloAndataSel" />
+			
+			
+			<h:outputLabel for="voloRitornoSel">Volo Ritorno</h:outputLabel>
+			<p:selectOneListbox id="voloRitornoSel" value="#{creaPacchettoPredefintoBean.voloRitorno}" converter="voloConverter" var="v" style="width:500px; height:250px">
+								
+				<f:selectItems 	value="#{creaPacchettoPredefintoBean.voliRitorno}" var="voloDTO"  itemValue="#{voloRitornoDTO}" />
+				
+				<p:column> #{v.idVolo}				</p:column>
+				<p:column> -						</p:column>
+				<p:column> #{v.luogoDestinazione}	</p:column>
+				<p:column> #{v.dataEOraFormattati}	</p:column>
+				<p:column> #{v.prezzo}€				</p:column>
+			</p:selectOneListbox>
+			<p:message for="voloRitornoSel" />
+			
+			<h:outputLabel for="escursioniSel">Escursioni</h:outputLabel>
+			<p:selectManyMenu id="escursioniSel" value="#{creaPacchettoPredefintoBean.escursioniSelezionate}" converter="escursioneConverter" var="e" showCheckbox="true" style="width:500px; height:250px">
+								
+				<f:selectItems 	value="#{creaPacchettoPredefintoBean.escursioni}" var="escursioneDTO"  itemValue="#{escursioneDTO}" />
+				
+				<p:column> #{e.idEscursione}		</p:column>
+				<p:column> -						</p:column>
+				<p:column> #{e.nome}				</p:column>
+				<p:column> #{e.dataFormattata}		</p:column>
+				<p:column> #{e.prezzo}€				</p:column>
+			</p:selectManyMenu>
+			<p:message for="escursioniSel" />
+		
+		</h:panelGrid>
+
+		<p:commandButton value="Modifica" action="#{creaPacchettoPredefintoBean.modificaPacchetto()}"/>
+		<p:commandButton action="/home?faces-redirect=true" value="Indietro"/>
+	</h:form>
+</h:body>
+</html>

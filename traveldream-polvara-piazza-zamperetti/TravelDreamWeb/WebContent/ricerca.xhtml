@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+</h:head>
+<h:body>
+	<ul>
+	<li>
+		<h:link outcome="login" value="Login" /> <br/><br/>
+	</li>
+	
+	<li>
+		<h:link outcome="impiegato/index" value="All'area impiegati" />
+		<ul>
+		
+		<li>	<h:link outcome="impiegato/creaHotel" value="crea un nuovo hotel" /> <br/>				</li>
+		<li>	<h:link outcome="impiegato/creaEscursione" value="crea una nuova escursione" /> <br/>	</li>
+		<li>	<h:link outcome="impiegato/creaVolo" value="crea un nuovo volo" /> 						</li>
+		</ul>
+	</li>
+	
+	<li>
+		<h:link outcome="cliente/index?user=true" value="All'area clienti" /> <br/>
+	</li>
+
+	</ul>
+	
+		<!--    
+
+	<h:form id="form">
+		<p:panel header="Ricerca la tua nuova destinazione" toggleable="true"
+			id="panel">
+			<h:panelGrid columns="2" cellpadding="1">
+
+				<h:outputLabel value="Destinazione :" for="destinazione" />
+				<p:autoComplete id="acSimple" value="#{autoCompleteBean.txt1}"
+					completeMethod="#{autoCompleteBean.complete}" />
+
+			</h:panelGrid>
+		</p:panel>
+
+		<p:commandButton value="Submit" id="submit" update="display"
+			oncomplete="PF('dialog').show()" />
+
+		<h:panelGrid id="display" columns="2" cellpadding="5">
+			<h:outputText value="Value 1: " />
+			<h:outputText value="#{autoCompleteBean.txt1}" />
+		</h:panelGrid>
+
+		<p:dialog header="Risultati" widgetVar="dialog" showEffect="fold"
+			hideEffect="fold" width="200">
+
+		</p:dialog>
+
+
+    <p:commandButton value="Cerca" id="submit" oncomplete="inserire pagina per mostrare risultati" />  
+	</h:form>
+      -->
+
+
+</h:body>
+</html>

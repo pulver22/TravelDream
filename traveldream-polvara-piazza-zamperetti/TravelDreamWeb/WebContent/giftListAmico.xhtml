@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<title>GiftList di #{gestoreInvitiBean.mailAmico}</title>
+</h:head>
+<h:body>
+	<p:layout >
+	<p:layoutUnit position="center" header="Dettagli della GiftList">	
+
+	    <p:dataTable id="voliGFAmico" var="v" value="#{gestoreInvitiBean.voliGFAmico}"> 
+	     
+	     <f:facet name="header">  
+            Voli in GL  
+        </f:facet>  
+	     
+	        <p:column headerText="Luogo Partenza" style="width:24%">  
+	            <h:outputText value="#{v.volo.luogoPartenza}" />  
+	        </p:column>  
+	  
+	        <p:column headerText="Luogo Destinazione" style="width:24%">  
+	            <h:outputText value="#{v.volo.luogoDestinazione}" />  
+	        </p:column> 
+	        
+	        <p:column headerText="Data" style="width:24%">  
+	            <h:outputText value="#{v.volo.dataEOraFormattati}" />  
+	        </p:column> 
+	        
+	        <p:column headerText="Prezzo" style="width:24%">  
+	            <h:outputText value="#{v.volo.prezzo}" />  
+	        </p:column> 
+	        
+	        <p:column style="width:4%">
+				<h:form>
+				<p:commandButton action="#{gestoreInvitiBean.regalaVolo(v)}" value="Regala!"/>
+				</h:form>		
+			</p:column>  
+			
+	    </p:dataTable>
+
+    
+	    <p:dataTable id="hotelsGFAmico" var="h" value="#{gestoreInvitiBean.hotelsGFAmico}"> 
+	     
+	     	<f:facet name="header">  
+           Hotels in GL  
+        </f:facet>  
+	     	
+	        <p:column headerText="Nome" style="width:24%">  
+	            <h:outputText value="#{h.hotel.nome}" />  
+	        </p:column>  
+	  
+	        <p:column headerText="Luogo" style="width:24%">  
+	            <h:outputText value="#{h.hotel.luogo}" />  
+	        </p:column> 
+	        
+	        <p:column headerText="Indirizzo" style="width:24%">  
+	            <h:outputText value="#{h.hotel.indirizzo}" />  
+	        </p:column> 
+	        
+	        <p:column headerText="Prezzo" style="width:24%">  
+	            <h:outputText value="#{h.hotel.prezzo}" />  
+	        </p:column> 
+	        
+	        <p:column style="width:4%">
+				<h:form>
+				<p:commandButton action="#{gestoreInvitiBean.regalaHotel(h)}" value="Regala!"/>
+				</h:form>			
+			</p:column>  
+			
+	    </p:dataTable>
+
+    
+	    <p:dataTable id="escursioniGFAmico" var="e" value="#{gestoreInvitiBean.escursioniGFAmico}"> 
+	     
+	     	<f:facet name="header">  
+            Escursioni in GL  
+        </f:facet>  
+	     
+	        <p:column headerText="Nome" style="width:24%">  
+	            <h:outputText value="#{e.escursione.nome}" />  
+	        </p:column>  
+	  
+	        <p:column headerText="Luogo" style="width:24%">  
+	            <h:outputText value="#{e.escursione.luogo}" />  
+	        </p:column> 
+	        
+	        <p:column headerText="Indirizzo" style="width:24%">  
+	            <h:outputText value="#{e.escursione.dataFormattata}" />  
+	        </p:column> 
+	        
+	        <p:column headerText="Prezzo" style="width:24%">  
+	            <h:outputText value="#{e.escursione.prezzo}" />  
+	        </p:column> 
+	        
+	        <p:column style="width:4%">
+				<h:form>
+				<p:commandButton action="#{gestoreInvitiBean.regalaEscursione(e)}" value="Regala!"/>
+				</h:form>		
+			</p:column>    
+			
+	    </p:dataTable>
+	    <h:form>
+    	<p:commandButton action="/home?faces-redirect=true" value="Indietro"/>
+    	</h:form>
+    </p:layoutUnit>
+    </p:layout>
+</h:body>
+</html>

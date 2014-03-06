@@ -1,0 +1,29 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head>
+<h:body>
+	<p:panel header="Componenti insufficienti">
+		Per il luogo selezionato non sono disponibili tutti i componenti necessari <br />
+		
+		<p:panelGrid columns="4">
+			<h:form>
+				<p:commandButton action="home?faces-redirect=true" value="Home" />
+			</h:form>
+			<h:form>
+				<p:commandButton action="/impiegato/creaHotel?faces-redirect=true" value="crea Hotel" />
+			</h:form>
+			<h:form>
+				<p:commandButton action="/impiegato/creaVolo?faces-redirect=true" value="crea Volo" />
+			</h:form>
+			<h:form>
+				<p:commandButton action="/impiegato/creaEscursione?faces-redirect=true" value="crea Escursione" />
+			</h:form>
+		</p:panelGrid>
+	</p:panel>
+</h:body>
+</html>

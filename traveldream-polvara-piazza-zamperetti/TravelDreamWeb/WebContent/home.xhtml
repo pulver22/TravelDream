@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Travel Dream - Home</title>
+</h:head>
+<h:body>
+	<p:layout >
+	
+		<p:layoutUnit position="north">
+			<h1>Travel Dream</h1>
+			
+			<!-- Utente non loggato -->
+			<h:panelGrid columns="2" cellpadding="1" rendered="#{!userBean.isLoggedIn()}" style="position:absolute; top:10px; right: 10px">
+				<h:form id="login" prependId="false" onsubmit="document.getElementById('login').action='j_security_check';">
+					<h:panelGrid columns="5" cellpadding="1" >
+					<p:outputLabel for="j_username" value="Email" />
+					<p:inputText id="j_username" name="j_username" />
+					<p:outputLabel for="j_password" value="Password" />
+					<p:password id="j_password" name="j_password" />
+					<p:commandButton id="submit" value="Login" ajax="false" />
+					</h:panelGrid>
+				</h:form>
+				<h:form>
+					<p:commandButton action="/register?faces-redirect=true" value="Registrati" />
+				</h:form>
+			</h:panelGrid>
+			
+			<!-- Utente loggato -->
+			<h:panelGrid columns="2" rendered="#{userBean.isLoggedIn()}" style="position:absolute; top:10px; right: 10px">
+				<h:outputLabel value="#{userBean.getUserNomeCognomeMail()}"/>
+				<h:form>
+					<p:commandButton action="#{logoutBean.logout}" value="Logout" />
+				</h:form>
+			</h:panelGrid>
+			
+		</p:layoutUnit>
+		
+		<p:layoutUnit position="west" header="Menu" rendered="#{userBean.isLoggedIn()}">
+			<h:form>
+				<!-- Utente loggato come IMPIEGATO -->
+				<p:menu rendered="#{userBean.isUtenteImpiegato()}" style="min-width:250px">
+			
+					<p:menuitem outcome="impiegato/creaHotel" value="Aggiungi un hotel" />
+				
+					<p:menuitem outcome="impiegato/creaEscursione" value="Aggiungi un'escursione" />
+					
+					<p:menuitem outcome="impiegato/creaVolo" value="Aggiungi un volo" />
+					
+					<p:menuitem outcome="impiegato/creaPacchettoPredefinito" value="Crea un nuovo pacchetto" />
+					
+					<p:menuitem outcome="impiegato/invalidaComponente" value="Gestisci componenti" />
+				
+				</p:menu>
+				
+				<!-- Utente loggato come CLIENTE -->
+				<p:menu rendered="#{userBean.isUtenteCliente()}">
+					
+					<p:menuitem outcome="cliente/carrello" value="Carrello" />
+					
+					<p:menuitem outcome="cliente/giftList" value="GiftList" />
+					
+					<p:menuitem outcome="cliente/storico" value="Storico" />
+				
+				</p:menu>
+				
+			</h:form>
+		
+		</p:layoutUnit>
+		
+		<p:layoutUnit position="east" header="Amici" collapsible="true" rendered="#{!userBean.isUtenteImpiegato()}">
+			
+			<p:panel header="Accedi a un pacchetto" rendered="#{!userBean.isUtenteImpiegato()}">
+				<h:form id="pacchettoAmico">
+				<h:panelGrid columns="3" id="panelPacchettoAmico">
+					<p:inputText id="codPacchetto" value="#{gestoreInvitiBean.idPacchettoAmico}" />
+					<p:watermark for="codPacchetto" value="codice di un pacchetto"/>
+					<p:commandButton update="pacchettoAmico" icon="ui-icon-check" action="#{gestoreInvitiBean.paginaPacchettoAmico()}" />
+					<p:message for="codPacchetto" />
+				</h:panelGrid>
+				</h:form>
+			</p:panel>
+					
+			<p:panel header="Visita giftlist" rendered="#{!userBean.isUtenteImpiegato()}">
+				<h:form id="giftlistAmico">
+				<h:panelGrid columns="3" id="PanelGiftlistAmico">
+					<p:inputText id="mailAmico" value="#{gestoreInvitiBean.mailAmico}" />
+					<p:watermark for="mailAmico" value="mail di un amico"/>
+					<p:commandButton update="giftlistAmico" icon="ui-icon-check" action="#{gestoreInvitiBean.paginaGiftListAmico()}" />
+					<p:message for="mailAmico" />
+				</h:panelGrid>
+				</h:form>
+			</p:panel>
+			
+		</p:layoutUnit>
+		
+		<p:layoutUnit position="center" header="Pacchetti Predefiniti">
+			<h:form>
+			
+			<p:dataTable id="pacchettiPredefinitiTable" var="p" widgetVar="carsTable"
+				value="#{tablePacchettiPredefinitiBean.pacchettiPredefinitiDTO}"
+				filteredValue="#{tablePacchettiPredefinitiBean.filteredPacchettiPredefinitiDTO}"
+				emptyMessage="Nessun pacchetto disponibile"
+				paginator="true" rows="10"  
+                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"  
+                 rowsPerPageTemplate="5,10,15">
+	
+			<p:column id="luogoColumn" headerText="Luogo" filterBy="luogo" filterMatchMode="contains" style="width:24%">
+				<h:outputText value="#{p.luogo}" />
+			</p:column>
+			
+
+			<p:column headerText="Luogo Partenza" style="width:23%">
+				<h:outputText value="#{p.voloAndata.luogoPartenza}" />
+			</p:column>
+
+			<p:column headerText="Data Partenza" style="width:23%">
+				<h:outputText value="#{p.voloAndata.dataEOraFormattati}" />
+			</p:column>
+
+			<p:column headerText="Data Ritorno" style="width:20%">
+				<h:outputText value="#{p.voloRitorno.dataEOraFormattati}" />
+			</p:column>
+
+			<p:column headerText="Prezzo" style="width:3%">
+				<h:outputText value="#{p.prezzo}" />
+			</p:column>
+			
+			<p:column style="width:3%">
+				
+				<p:commandButton action="#{dettagliPacchettoPredefinitoBean.visualizzaPacchetto(p)}"
+				icon="ui-icon-search" ajax="false" onclick="form.target='_blank'" />
+				
+				
+			</p:column>
+			
+			<!--  funzioni specifiche per CLIENTE -->
+			<p:column rendered="#{userBean.isUtenteCliente()}" style="width:4%">
+				
+				<p:commandButton action="#{aggiungiAlCarrelloBean.aggiungiAlCarrello()}" value="Aggiungi">
+					<f:setPropertyActionListener value="#{p}"
+						target="#{aggiungiAlCarrelloBean.pacchettoScelto}"/>
+				</p:commandButton>
+				
+			</p:column>
+
+			<!--  funzioni specifiche per IMPIEGATO -->
+			<p:column rendered="#{userBean.isUtenteImpiegato()}" style="width:4%">
+				
+				<p:commandButton value="Modifica" action="#{creaPacchettoPredefintoBean.initModificaPacchetto(p)}"/>
+				
+			</p:column>
+			
+			<p:column rendered="#{userBean.isUtenteImpiegato()}" style="width:4%">
+				
+				<p:commandButton value="Rimuovi" action="#{invalidaComponenteBean.rimuoviPacchetto(p)}"/>
+				
+			</p:column>
+	
+			</p:dataTable>
+			</h:form>
+	
+		</p:layoutUnit>
+	
+	</p:layout>
+	
+</h:body>
+</html>
